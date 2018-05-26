@@ -1,0 +1,3 @@
+The facebook login can only work from a secure localhost. Thus, i downloaded Xamp and enabled Apache Server.
+Then I transfered my files to apache htpdoc folder so i could run at localhost/folder/file (by hand), my files.
+Useful info: if you want to transfer between different html pages, you need to change the settings of apache/conf/httpd to Require all granted.
