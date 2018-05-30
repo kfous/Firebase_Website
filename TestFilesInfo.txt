@@ -1,0 +1,1 @@
+TestAjax and Test it files have the components of the after login page. On future commit these two wil become one in the page mentioned, of index.html
