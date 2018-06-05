@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+       
+	  Select Countries:<br>
+	  Greece : <input type="checkbox" value="Greece" id="country1" onclick="CheckBox();"/><br> 
+	  USA : <input type="checkbox" value="USA" id="country2" onclick="CheckBox();"/><br>
+	  England : <input type="checkbox" value="England" id="country3" onclick="CheckBox();"/><br>
+	  Angola : <input type="checkbox" value="Angola" id="country4" onclick="CheckBox();"/><br>
+	   
+      <br>Select Chart:<br>
+        <select name="Chart Category" id="mySelect">
+            <option selected disabled>Choose</option>
+            <option value="PieChart">PieChart</option>
+            <option value="ColumnChart">ColumnChart</option>
+            <option value="BarChart">BarChart</option>
+        </select>
+        <input type="submit" value="Submit" onclick="drawChart();"/>
+		<button id="clear">Clear</button>
+       
+        <p id="demo"></p>
+		
+		<div id="piechart"></div>
+		<div id="columnchart"></div>
+		<div id="barchart"></div>
+		
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+
+
+
+
+function drawChart() {
+    var x = document.getElementById("mySelect").value;
+    if(x === "PieChart"){
+	var myNode = document.getElementById("mySelect");
+	
+	var data = google.visualization.arrayToDataTable([
+  ['Task', 'Hours per Day'],
+  ['Work', 8],
+  ['Eat', 2],
+  ['TV', 4],
+  ['Gym', 2],
+  ['Sleep', 8]]);
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'My Average Day', 'width':550, 'height':400};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);  
+    }
+    else if(x === "ColumnChart"){
+	  var data = new google.visualization.DataTable();
+      data.addColumn('timeofday', 'Time of Day');
+      data.addColumn('number', 'Motivation Level');
+
+      data.addRows([
+        [{v: [8, 0, 0], f: '8 am'}, 1],
+        [{v: [9, 0, 0], f: '9 am'}, 2],
+        [{v: [10, 0, 0], f:'10 am'}, 3],
+        [{v: [11, 0, 0], f: '11 am'}, 4],
+        [{v: [12, 0, 0], f: '12 pm'}, 5],
+        [{v: [13, 0, 0], f: '1 pm'}, 6],
+        [{v: [14, 0, 0], f: '2 pm'}, 7],
+        [{v: [15, 0, 0], f: '3 pm'}, 8],
+        [{v: [16, 0, 0], f: '4 pm'}, 9],
+        [{v: [17, 0, 0], f: '5 pm'}, 10],
+      ]);
+
+      var options = {
+        title: 'Motivation Level Throughout the Day',
+        hAxis: {
+          title: 'Time of Day',
+          format: 'h:mm a',
+          viewWindow: {
+            min: [7, 30, 0],
+            max: [17, 30, 0]
+          }
+        },
+        vAxis: {
+          title: 'Rating (scale of 1-10)'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+        document.getElementById('columnchart'));
+
+      chart.draw(data, options);
+    }
+	else if(x === "BarChart"){
+	
+	var data = google.visualization.arrayToDataTable([
+        ['City', '2010 Population', '2000 Population'],
+        ['New York City, NY', 8175000, 8008000],
+        ['Los Angeles, CA', 3792000, 3694000],
+        ['Chicago, IL', 2695000, 2896000],
+        ['Houston, TX', 2099000, 1953000],
+        ['Philadelphia, PA', 1526000, 1517000]
+      ]);
+
+      var options = {
+        title: 'Population of Largest U.S. Cities',
+        chartArea: {width: '50%'},
+        hAxis: {
+          title: 'Total Population',
+          minValue: 0
+        },
+        vAxis: {
+          title: 'City'
+        }
+      };
+
+      var chart = new google.visualization.BarChart(document.getElementById('barchart'));
+      chart.draw(data, options);
+	}
+}
+
+HTMLElement.prototype.empty = function() {
+    var that = this;
+    while (that.hasChildNodes()) {
+        that.removeChild(that.lastChild);
+    }
+};
+
+var empty = document.getElementById('clear'),
+    test1 = document.getElementById('piechart');
+	test2 = document.getElementById('columnchart');
+	test3 = document.getElementById('barchart');
+
+empty.onclick = function() {
+    test1.empty();
+	test2.empty();
+	test3.empty();
+}
+
+</script>
+
+<script>
+function CheckBox() {
+    var checkBox = document.getElementById("myCheck");
+    var text = document.getElementById("text");
+    if (checkBox.checked == true){
+        text.style.display = "block";
+    } else {
+       text.style.display = "none";
+    }
+}
+</script>
+    </body>
+</html>

@@ -1,1 +1,1 @@
-TestAjax and Test it files have the components of the after login page. On future commit these two wil become one in the page mentioned, of index.html
+Now testit file has both save and search countries from wiki.In future commits this will become the after login page of index.html
